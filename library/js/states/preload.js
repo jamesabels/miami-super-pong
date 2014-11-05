@@ -14,6 +14,7 @@ PhaserBp.Preload.prototype = {
     this.load.audio("outOfBounds", "library/assets/OutOfBounds.wav");
     this.load.audio("reset", "library/assets/Reset.wav");
     this.load.audio("score", "library/assets/Score.wav");
+    this.load.audio("music", "library/assets/music.ogg"); 
   },
 
 	create: function () {

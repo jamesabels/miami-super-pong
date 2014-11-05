@@ -6,8 +6,15 @@ PhaserBp.Game = function(game) {
 PhaserBp.Game.prototype = {
 
     create: function() {
+
       // Render Background
       background = this.add.sprite(0, 0, 'bg');
+
+      // CREATE MUSIC
+      music = this.add.audio("music");
+
+      // PLAY MUSIC
+      music.play();
 
       // SCORE SETTINGS
       playerScore = 0;
@@ -81,9 +88,9 @@ PhaserBp.Game.prototype = {
     this.physics.arcade.collide(paddleLeft, ball);
     this.physics.arcade.collide(paddleRight, ball);
 
-    // Paddle Controls
+    // PADDLE CONTROLS
 
-    // Move Up
+    // MOVE UP
     if (upKey.isDown) {
       paddleLeft.body.velocity.y = speedUp;
     }
@@ -97,7 +104,7 @@ PhaserBp.Game.prototype = {
         ball.body.velocity.y = 0;
     }
 
-    // Move Down
+    // MOVE DOWN
     if (downKey.isDown) {
       paddleLeft.body.velocity.y = speedDown;
     }
