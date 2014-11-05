@@ -215,5 +215,6 @@ PhaserBp.Game.prototype = {
                 ball.body.position.x = 28.0;
             }
         }
-      }
-};
+
+      } // END UPDATE
+}; // END PROTOTYPE
