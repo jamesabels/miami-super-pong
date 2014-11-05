@@ -133,8 +133,6 @@ PhaserBp.Game.prototype = {
       playerServing = 2;
      }
 
-    //FIXME: Player no longer serves the ball, it automatically starts.
-
     if( playerServing === 1 ) {
         ball.body.acceleration.x = 0;
         ball.body.velocity.x  = 0;
