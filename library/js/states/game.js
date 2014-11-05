@@ -16,6 +16,8 @@ PhaserBp.Game.prototype = {
       // PLAY MUSIC
       music.play();
 
+      // FIXME: Fix double music bug
+
       // SCORE SETTINGS
       playerScore = 0;
       printPlayerScore = "0";
@@ -52,7 +54,7 @@ PhaserBp.Game.prototype = {
       ballGravityRight = ballGravity;
       ball.body.gravity.x = ballGravity;
       ball.body.bounce.x = 1;
-      ball.body.maxVelocity.x = 1200;
+      ball.body.maxVelocity.x = 2200;
       ball.body.collideWorldBounds = false;
 
       // PLAYER SERVING STATE
@@ -100,7 +102,7 @@ PhaserBp.Game.prototype = {
     if(upKey.isUp && downKey.isUp) {
         ball.body.velocity.y = 0;
     }
-    if (upKey.isDown && playerServing === 3 ) {
+    if (upKey.isDown && playerServing === 2 ) {
         ball.body.velocity.y = 0;
     }
 
@@ -114,7 +116,7 @@ PhaserBp.Game.prototype = {
     if(downKey.isUp && upKey.isUp) {
         ball.body.velocity.y = 0;
     }
-    if (downKey.isDown && playerServing === 3 ) {
+    if (downKey.isDown && playerServing === 2 ) {
         ball.body.velocity.y = 0;
     }
     // LOCK BALLS Y AXIS
@@ -125,39 +127,32 @@ PhaserBp.Game.prototype = {
         ball.body.velocity.y = 0;
     }
 
-    // SERVE
-    if (spaceKey.isDown) {
+    // // SERVE
+    if (spaceKey.isDown && ball.body.velocity.x === 0) {
+      ball.body.velocity.x = 1200;
       playerServing = 2;
-    }
+     }
 
-    // SERVING STATE
-    if( playerServing === 2 ) {
-      ball.body.gravity.x = ballGravity;
-      ball.body.acceleration.x   = 1200;
-    }
+    //FIXME: Player no longer serves the ball, it automatically starts.
+
     if( playerServing === 1 ) {
+        ball.body.acceleration.x = 0;
         ball.body.velocity.x  = 0;
         ball.body.gravity.x = 0;
         ball.body.position.x = 28.0;
     }
-    else if(playerServing === 3) {
-        ball.body.acceleration.x = 0;
-    }
-    else {
-        playerServing = 3;
-    }
 
     // PLAYER HIT
-    if (ball.body.touching.left && paddleLeft.body.touching.right && playerServing === 3) {
-      ball.body.velocity.x + 1000;
+    if (ball.body.touching.left && paddleLeft.body.touching.right && playerServing === 2) {
+      ball.body.velocity.x = 1200;
       ball.body.gravity.y  = Math.floor(Math.random() * -20000) + 2000;
       ballHitSFX.play();
     }
 
     // AI HIT
-    if (ball.body.touching.right && paddleRight.body.touching.left && playerServing === 3) {
+    if (ball.body.touching.right && paddleRight.body.touching.left && playerServing === 2) {
+      console.log("Ball Touching!");
       ball.body.velocity.x = -1200;
-      ball.body.gravity.x = ballGravityRight;
       ball.body.gravity.y  = Math.floor(Math.random() * 20000) + 2000;
       ballHitSFX.play();
     }
@@ -204,12 +199,12 @@ PhaserBp.Game.prototype = {
     }
     // AI SCORE RESET
     if ( aiScore >= 8) {
-        this.state.restart();
+      this.state.restart();
 
     }
     // PLAYER SCORE RESET
     if ( playerScore >= 8) {
-        this.state.restart();
+      this.state.restart();
     }
 
         function resetGame() {
