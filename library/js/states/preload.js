@@ -4,7 +4,7 @@ PhaserBp.Preload = function(game) {
 };
 
 PhaserBp.Preload.prototype = {
-
+  //TODO: Comment out prelaoded assets and define which state they belong to
 	preload: function () {
     this.load.image("bg", "library/assets/bg.png");
     this.load.image("sunset", "library/assets/filter.png");
@@ -14,7 +14,7 @@ PhaserBp.Preload.prototype = {
     this.load.audio("outOfBounds", "library/assets/OutOfBounds.wav");
     this.load.audio("reset", "library/assets/Reset.wav");
     this.load.audio("score", "library/assets/Score.wav");
-    this.load.audio("music", "library/assets/music.ogg"); 
+    this.load.audio("music", "library/assets/music.ogg");
   },
 
 	create: function () {
@@ -22,6 +22,6 @@ PhaserBp.Preload.prototype = {
 	},
 
 	update: function () {
-    this.state.start('Game');
+    this.state.start('MainMenu');
 	}
 };
